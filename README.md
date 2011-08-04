@@ -3,6 +3,8 @@
 * Author: [John D Wells](http://johndwells.com)
 * Requires: [ExpressionEngine 2](http://www.expressionengine.com), [Minimee 2+](http://johndwells.com/software/minimee)
 
+_MSMinimee is a work in progress; do not install without expecting it to break something._
+
 _Minimee 2 is currently under heavy development; you're welcome to check out development over on [Github](https://github.com/johndwells/Minimee)._
 
 
