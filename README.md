@@ -5,7 +5,7 @@
 
 _MSMinimee is a work in progress; do not install without expecting it to break something._
 
-_Minimee 2 is currently under heavy development; you're welcome to check out development over on [Github](https://github.com/johndwells/Minimee)._
+_Minimee 2 is currently under heavy development; you're welcome to check out progress (or participate) over on [Github](https://github.com/johndwells/Minimee/tree/development)._
 
 
 ## Overview
