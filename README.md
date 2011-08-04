@@ -1,12 +1,12 @@
 # MSMinimee
 
 * Author: [John D Wells](http://johndwells.com)
-* Requires: ExpressionEngine 2, [http://johndwells.com/software/minimee](Minimee) 1.4+ (1.4 is currently under dev)
+* Requires: ExpressionEngine 2, [Minimee](http://johndwells.com/software/minimee) 1.4+ (1.4 is currently under dev)
 
 
 ## Overview
 
-MSMinimee is an ExpressionEngine Module that makes [http://johndwells.com/software/minimee](Minimee) fully MSM-compatible.  
+MSMinimee is an ExpressionEngine Module that makes [Minimee](http://johndwells.com/software/minimee) fully MSM-compatible.  
 _This is not a replacement of Minimee_; rather it extends it only where it needs to. This way I can develop the features & functionality of MSM support separate from the core of what Minimee does.
 
 ## But wait, why?
