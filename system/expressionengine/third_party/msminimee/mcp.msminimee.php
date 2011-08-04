@@ -12,7 +12,7 @@
  * @filesource
  */
  
-// ------------------------------------------------------------------------
+// END--------
 
 require_once PATH_THIRD . 'msminimee/config.php';
 require_once PATH_THIRD . 'msminimee/helper.php';
@@ -31,7 +31,11 @@ class Msminimee_mcp {
 	
 	public $return_data;
 	
-	private $_base_url;
+	protected $_base_url;
+
+	public $EE;
+	public $helper;
+	
 	
 	/**
 	 * Constructor
@@ -39,8 +43,7 @@ class Msminimee_mcp {
 	public function __construct()
 	{
 		$this->EE =& get_instance();
-
-		MSMinimee_helper::init();
+		$this->helper = new MSMinimee_helper();
 		
 		$this->_base_url = BASE.AMP.'C=addons_modules'.AMP.'M=show_module_cp'.AMP.'module=msminimee';
 		
@@ -50,7 +53,7 @@ class Msminimee_mcp {
 		));
 	}
 	
-	// ----------------------------------------------------------------
+	// END
 
 	/**
 	 * Index Function

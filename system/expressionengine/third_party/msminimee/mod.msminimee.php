@@ -12,7 +12,7 @@
  * @filesource
  */
  
-// ------------------------------------------------------------------------
+// END--------
 
 require_once PATH_THIRD . 'msminimee/config.php';
 require_once PATH_THIRD . 'msminimee/helper.php';
@@ -31,12 +31,17 @@ require_once PATH_THIRD . 'minimee/pi.minimee.php';
 class Msminimee extends Minimee {
 	
 	
+	/**
+	 * Constructor
+	 */
 	public function __construct()
 	{
-		MSMinimee_helper::init();
-		
-		parent::__construct();
+		$this->EE =& get_instance();
+		$this->helper = new MSMinimee_helper();
+		$this->cache_key = MSMINIMEE_KEY;
 	}
+	// END
+
 	
 	/**
 	 * Override _init so that we can first see if we have settings for site
@@ -44,12 +49,12 @@ class Msminimee extends Minimee {
 	protected function _init()
 	{
 		// Our helper function will put our settings into session
-		MSMinimee_helper::get_settings();
+		$this->helper->get_settings();
 	
 		// chaining !
 		return parent::_init();
 	}
-	
+	// END
 }
 /* End of file mod.msminimee.php */
 /* Location: /system/expressionengine/third_party/msminimee/mod.msminimee.php */

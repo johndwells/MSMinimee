@@ -12,7 +12,7 @@
  * @filesource
  */
  
-// ------------------------------------------------------------------------
+// END--------
 
 require_once PATH_THIRD . 'minimee/helper.php';
 
@@ -24,39 +24,38 @@ require_once PATH_THIRD . 'minimee/helper.php';
  */
 class MSMinimee_helper extends Minimee_helper
 {
+
 	/**
-	 * init: define our logging class name
-	 * @access  public
-	 * @return  void
+	 * Constructor
 	 */
-	public static function init()
+	public function __construct()
 	{
-		if (self::$log_name === NULL)
-		{
-			self::$log_name = MSMINIMEE_NAME;
-		}
+		$this->EE =& get_instance();
+		$this->log_name = MSMINIMEE_NAME;
+		$this->cache_key = MSMINIMEE_KEY;
 	}
+	// END
+	
 
 	/**
 	 * Used by module, retrieves settings from module table
 	 *
 	 * @return void
 	 */
-	public static function get_settings()
+	public function get_settings()
 	{
-        $ee =& get_instance();
         
 		// if settings are already in session cache, use those
-		if ( ! isset($ee->session->cache['minimee']['settings']))
+		if ( ! isset($this->EE->session->cache[$this->cache_key]['settings']))
 		{
 			$settings = array();
 				
-			$ee->db
+			$this->EE->db
 				->select('settings')
 				->from('msminimee')
-				->where(array('enabled' => 'y', 'site_id' => (int) $ee->config->item('site_id')))
+				->where(array('enabled' => 'y', 'site_id' => (int) $this->EE->config->item('site_id')))
 				->limit(1);
-			$query = $ee->db->get();
+			$query = $this->EE->db->get();
 			
 			if ($query->num_rows() > 0)
 			{
@@ -64,14 +63,14 @@ class MSMinimee_helper extends Minimee_helper
 			}
 			else
 			{
-				self::log('Could not find any settings to use. Will try default Minimee now.', 2);
+				$this->log('Could not find any Module settings for this site. Will now try in the normal Minimee places (config, global_vars, and then Extension).', 2);
 
 				parent::get_settings();
 			}
 		
 			// normalize settings before adding to session
-			self::normalize_settings($settings);
-			$ee->session->cache['minimee'] = array(
+			$this->normalize_settings($settings);
+			$this->EE->session->cache[$this->cache_key] = array(
 				'settings' => $settings,
 				'js' => array(),
 				'css' => array()
@@ -81,8 +80,8 @@ class MSMinimee_helper extends Minimee_helper
 			unset($settings);
 		}
 		
-		// return settings back to plugin
-		return $ee->session->cache['minimee']['settings'];
+		// return settings back to module
+		return $this->EE->session->cache[$this->cache_key]['settings'];
 	}
 	// END
 }

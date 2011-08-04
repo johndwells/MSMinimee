@@ -12,7 +12,7 @@
  * @filesource
  */
  
-// ------------------------------------------------------------------------
+// END--------
 
 require_once PATH_THIRD . 'msminimee/config.php';
 require_once PATH_THIRD . 'msminimee/helper.php';
@@ -27,10 +27,11 @@ require_once PATH_THIRD . 'msminimee/helper.php';
  * @link		http://johndwells.com
  */
 class Msminimee_upd {
-	
+
 	public $version = MSMINIMEE_VER;
 	
-	private $EE;
+	protected $EE;
+	protected $helper;
 	
 	/**
 	 * Constructor
@@ -38,11 +39,10 @@ class Msminimee_upd {
 	public function __construct()
 	{
 		$this->EE =& get_instance();
-
-		MSMinimee_helper::init();
+		$this->helper = new MSMinimee_helper();
 	}
 	
-	// ----------------------------------------------------------------
+	// END
 	
 	/**
 	 * Installation Method
@@ -86,7 +86,7 @@ class Msminimee_upd {
 		if ($query->num_rows() > 0)
 		{
 			$settings = unserialize($query->row()->settings);
-			MSMinimee_helper::normalize_settings($settings);
+			$this->helper->normalize_settings($settings);
 			
 			$default_data = array(
 				'site_id' => 1,
@@ -101,8 +101,8 @@ class Msminimee_upd {
 		
 		return TRUE;
 	}
+	// END
 
-	// ----------------------------------------------------------------
 	
 	/**
 	 * Uninstall
@@ -128,8 +128,8 @@ class Msminimee_upd {
 		
 		return TRUE;
 	}
-	
-	// ----------------------------------------------------------------
+	// END
+
 	
 	/**
 	 * Module Updater
@@ -141,6 +141,7 @@ class Msminimee_upd {
 		// If you have updates, drop 'em in here.
 		return TRUE;
 	}
+	// END
 	
 }
 /* End of file upd.msminimee.php */
