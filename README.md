@@ -1,7 +1,9 @@
 # MSMinimee
 
 * Author: [John D Wells](http://johndwells.com)
-* Requires: ExpressionEngine 2, [Minimee](http://johndwells.com/software/minimee) 1.4+ (1.4 is currently under dev)
+* Requires: [ExpressionEngine 2](http://www.expressionengine.com), [Minimee 2+](http://johndwells.com/software/minimee)
+
+_Minimee 2 is currently under heavy development; you're welcome to check out development over on [Github](https://github.com/johndwells/MSMinimee)._
 
 
 ## Overview
@@ -27,7 +29,7 @@ But let me know if you read this and think otherwise.
 
 ## Installation Instructions
 
-* Be sure Minimee 1.4+ is present in your system/expressionengine/third_party folder
+* Be sure Minimee 2+ is present in your system/expressionengine/third_party folder
 * Copy the MSMinimee folder into your system/expressionengine/third_party folder
 * Visit your Modules page and install MSMinimee
 
