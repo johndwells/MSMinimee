@@ -72,21 +72,6 @@ class MSMinimee_helper extends Minimee_helper
 				// normalize settings before adding to session
 				$this->normalize_settings($settings);
 	
-				// use global FCPATH if nothing set
-				if ( ! $settings['base_path'])
-				{
-					$settings['base_path'] = FCPATH;
-				}
-				
-				// use config base_url if nothing set
-				if ( ! $settings['base_url'])
-				{
-					$settings['base_url'] = $this->EE->config->config['base_url'];
-				}
-	
-				// convert to bool
-				$settings['disable'] = (bool) preg_match('/1|true|on|yes|y/i', $settings['disable']);
-	
 				// now set our cache
 				$this->cache = array(
 					'settings' => $settings,
