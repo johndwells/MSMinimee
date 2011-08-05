@@ -41,19 +41,6 @@ class Msminimee extends Minimee {
 	}
 	// END
 
-	
-	/**
-	 * Override _init so that we can first see if we have settings for site
-	 */
-	protected function _init()
-	{
-		// Our helper function will put our settings into session
-		$this->helper->get_settings();
-	
-		// chaining !
-		return parent::_init();
-	}
-	// END
 }
 /* End of file mod.msminimee.php */
 /* Location: /system/expressionengine/third_party/msminimee/mod.msminimee.php */
