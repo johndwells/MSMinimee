@@ -38,7 +38,6 @@ class Msminimee extends Minimee {
 	{
 		$this->EE =& get_instance();
 		$this->helper = new MSMinimee_helper();
-		$this->cache_key = MSMINIMEE_KEY;
 	}
 	// END
 

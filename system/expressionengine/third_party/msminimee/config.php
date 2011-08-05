@@ -2,7 +2,6 @@
 if (! defined('MSMSMINIMEE_VER'))
 {
 	define('MSMINIMEE_NAME', 'MSMinimee');
-	define('MSMINIMEE_KEY',  'msminimee');
 	define('MSMINIMEE_VER',  '1.0.0');
 	define('MSMINIMEE_AUTHOR',  'John D Wells');
 	define('MSMINIMEE_DOCS',  'http://johndwells.com/software/msminimee');

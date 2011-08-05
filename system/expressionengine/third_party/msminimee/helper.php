@@ -12,7 +12,7 @@
  * @filesource
  */
  
-// END--------
+// ------------------------------------------------------------------------
 
 require_once PATH_THIRD . 'minimee/helper.php';
 
@@ -27,18 +27,26 @@ class MSMinimee_helper extends Minimee_helper
 
 	/**
 	 * Constructor
+	 * Overrides Minimee_helper::__construct() completely
 	 */
 	public function __construct()
 	{
 		$this->EE =& get_instance();
 		$this->log_name = MSMINIMEE_NAME;
-		$this->cache_key = MSMINIMEE_KEY;
+		
+		if ( ! array_key_exists('msminimee', $this->EE->session->cache))
+		{
+			$this->EE->session->cache['msminimee'] = array();
+		}
+
+		$this->cache =& $this->EE->session->cache['msminimee'];
 	}
 	// END
 	
 
 	/**
 	 * Used by module, retrieves settings from module table
+	 * Overrides Minimee_helper::get_settings() completely
 	 *
 	 * @return void
 	 */
@@ -46,7 +54,7 @@ class MSMinimee_helper extends Minimee_helper
 	{
         
 		// if settings are already in session cache, use those
-		if ( ! isset($this->EE->session->cache[$this->cache_key]['settings']))
+		if ( ! isset($this->cache['settings']))
 		{
 			$settings = array();
 				
@@ -60,6 +68,34 @@ class MSMinimee_helper extends Minimee_helper
 			if ($query->num_rows() > 0)
 			{
 				$settings = unserialize($query->row()->settings);
+	
+				// normalize settings before adding to session
+				$this->normalize_settings($settings);
+	
+				// use global FCPATH if nothing set
+				if ( ! $settings['base_path'])
+				{
+					$settings['base_path'] = FCPATH;
+				}
+				
+				// use config base_url if nothing set
+				if ( ! $settings['base_url'])
+				{
+					$settings['base_url'] = $this->EE->config->config['base_url'];
+				}
+	
+				// convert to bool
+				$settings['disable'] = (bool) preg_match('/1|true|on|yes|y/i', $settings['disable']);
+	
+				// now set our cache
+				$this->cache = array(
+					'settings' => $settings,
+					'js' => array(),
+					'css' => array()
+				);
+	
+				// free memory where possible			
+				unset($settings);
 			}
 			else
 			{
@@ -67,21 +103,10 @@ class MSMinimee_helper extends Minimee_helper
 
 				parent::get_settings();
 			}
-		
-			// normalize settings before adding to session
-			$this->normalize_settings($settings);
-			$this->EE->session->cache[$this->cache_key] = array(
-				'settings' => $settings,
-				'js' => array(),
-				'css' => array()
-			);
-	
-			// free memory where possible			
-			unset($settings);
 		}
 		
 		// return settings back to module
-		return $this->EE->session->cache[$this->cache_key]['settings'];
+		return $this->cache['settings'];
 	}
 	// END
 }
