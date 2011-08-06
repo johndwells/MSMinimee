@@ -34,12 +34,12 @@ class MSMinimee_helper extends Minimee_helper
 		$this->EE =& get_instance();
 		$this->log_name = MSMINIMEE_NAME;
 		
-		if ( ! array_key_exists('msminimee', $this->EE->session->cache))
+		if ( ! array_key_exists('msminimee_' . $this->EE->config->item('site_id'), $this->EE->session->cache))
 		{
-			$this->EE->session->cache['msminimee'] = array();
+			$this->EE->session->cache['msminimee_' . $this->EE->config->item('site_id')] = array();
 		}
 
-		$this->cache =& $this->EE->session->cache['msminimee'];
+		$this->cache =& $this->EE->session->cache['msminimee_' . $this->EE->config->item('site_id')];
 	}
 	// END
 	
