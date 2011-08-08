@@ -14,10 +14,6 @@
  
 // END--------
 
-require_once PATH_THIRD . 'msminimee/config.php';
-require_once PATH_THIRD . 'msminimee/helper.php';
-require_once PATH_THIRD . 'minimee/pi.minimee.php';
-
 /**
  * MSMinimee Module Front End File
  *
@@ -28,8 +24,9 @@ require_once PATH_THIRD . 'minimee/pi.minimee.php';
  * @link		http://johndwells.com
  */
 
-class Msminimee extends Minimee {
+class Msminimee {
 	
+	public $return_data;
 	
 	/**
 	 * Constructor
@@ -37,9 +34,7 @@ class Msminimee extends Minimee {
 	public function __construct()
 	{
 		$this->EE =& get_instance();
-		$this->helper = new MSMinimee_helper();
 	}
-	// END
 
 }
 /* End of file mod.msminimee.php */
