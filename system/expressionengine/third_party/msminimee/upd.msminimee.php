@@ -12,7 +12,7 @@
  * @filesource
  */
  
-// END--------
+// ------------------------------------------------------------------------
 
 require_once PATH_THIRD . 'msminimee/config.php';
 require_once PATH_THIRD . 'msminimee/helper.php';
@@ -74,30 +74,6 @@ class Msminimee_upd {
 		
 		// free up memory
 		unset($mod_data, $fields);
-		
-		// should be bring over settings from Minimee Extensions?
-		$this->EE->db
-					->select('settings')
-					->from('extensions')
-					->where(array('enabled' => 'y', 'class' => 'Minimee_ext' ))
-					->limit(1);
-		$query = $this->EE->db->get();
-		
-		if ($query->num_rows() > 0)
-		{
-			$settings = unserialize($query->row()->settings);
-			$this->helper->normalize_settings($settings);
-			
-			$default_data = array(
-				'site_id' => 1,
-				'enabled' => 'y',
-				'settings' => serialize($settings)	
-			);
-			$this->EE->db->insert('msminimee', $default_data);
-			
-			unset($default_data);
-		}
-		unset($query);
 		
 		return TRUE;
 	}
