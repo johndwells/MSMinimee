@@ -38,11 +38,9 @@ But let me know if you read this and think otherwise.
 If you previously had Minimee's Extension installed, settings will be automatically carried over for your default site.
 
 
-
 ## Tag Usage
 
-Usage is identical to Minimee, except all tags begin with {exp:msminimee:xxx} instead of {exp:minimee:xxx}. Simples.
-
+Use Minimee as normal, and if you have saved settings for a particular site, those will be used. Otherwise, the default site settings will be used.
 
 
 ## Changelog

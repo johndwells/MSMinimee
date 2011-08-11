@@ -31,7 +31,6 @@ class Msminimee_upd {
 	public $version = MSMINIMEE_VER;
 	
 	protected $EE;
-	protected $helper;
 	
 	/**
 	 * Constructor
@@ -39,7 +38,6 @@ class Msminimee_upd {
 	public function __construct()
 	{
 		$this->EE =& get_instance();
-		$this->helper = new MSMinimee_helper();
 	}
 	
 	// END

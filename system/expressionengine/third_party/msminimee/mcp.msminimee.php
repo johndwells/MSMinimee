@@ -34,7 +34,6 @@ class Msminimee_mcp {
 	protected $_base_url;
 
 	public $EE;
-	public $helper;
 	
 	
 	/**
@@ -43,7 +42,6 @@ class Msminimee_mcp {
 	public function __construct()
 	{
 		$this->EE =& get_instance();
-		$this->helper = new MSMinimee_helper();
 		
 		$this->_base_url = BASE.AMP.'C=addons_modules'.AMP.'M=show_module_cp'.AMP.'module=msminimee';
 		

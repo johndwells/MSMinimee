@@ -2,10 +2,13 @@
 
 $lang = array(	
 	'msminimee_module_name' => 
-	'MSMinimee',
+		'MSMinimee',
 
 	'msminimee_module_description' => 
-	'An ExpressionEngine Module that makes Minimee fully MSM-compatible.',
+		'An ExpressionEngine Module that makes Minimee fully MSM-compatible.',
+
+	'msminimee_unauthorized_access' =>
+		'The site settings you have submitted does not match the current site the CP has loaded. Revisit the extensions page and try again.',
 
 	'module_home' => 'MSMinimee',
 	

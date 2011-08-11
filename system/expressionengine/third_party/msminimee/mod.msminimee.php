@@ -26,16 +26,11 @@
 
 class Msminimee {
 	
-	public $return_data;
-	
 	/**
 	 * Constructor
 	 */
-	public function __construct()
-	{
-		$this->EE =& get_instance();
-	}
-
+	public function __construct() {}
+	
 }
 /* End of file mod.msminimee.php */
 /* Location: /system/expressionengine/third_party/msminimee/mod.msminimee.php */
