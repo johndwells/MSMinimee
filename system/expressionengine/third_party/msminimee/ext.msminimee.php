@@ -33,6 +33,7 @@ class Msminimee_ext {
 	public $docs_url		= MSMINIMEE_DOCS;
 	public $name			= MSMINIMEE_NAME;
 	public $version			= MSMINIMEE_VER;
+	public $required_by = array('module');
 	public $settings_exist	= 'n';
 	
 	protected $EE;
@@ -66,40 +67,7 @@ class Msminimee_ext {
 	 */
 	public function activate_extension()
 	{
-		$rows = array(
-			array(
-				'class'		=> __CLASS__,
-				'method'	=> 'on_minimee_get_settings',
-				'hook'		=> 'minimee_get_settings',
-				'settings'	=> '',
-				'version'	=> $this->version,
-				'enabled'	=> 'y'
-			),
-			array(
-				'class'		=> __CLASS__,
-				'method'	=> 'on_minimee_get_current_settings',
-				'hook'		=> 'minimee_get_current_settings',
-				'settings'	=> '',
-				'version'	=> $this->version,
-				'enabled'	=> 'y'
-			),
-			array(
-				'class'		=> __CLASS__,
-				'method'	=> 'on_minimee_save_settings',
-				'hook'		=> 'minimee_save_settings',
-				'settings'	=> '',
-				'version'	=> $this->version,
-				'enabled'	=> 'y'
-			)
-		);
-
-		foreach($rows as $row)
-		{
-			$this->EE->db->insert('extensions', $row);
-		}
-		
-		unset($rows);
-		
+		return TRUE;
 	}	
 	// END
 
@@ -248,8 +216,7 @@ class Msminimee_ext {
 	 */
 	function disable_extension()
 	{
-		$this->EE->db->where('class', __CLASS__);
-		$this->EE->db->delete('extensions');
+		return TRUE;
 	}
 	// END
 
@@ -264,10 +231,7 @@ class Msminimee_ext {
 	 */
 	function update_extension($current = '')
 	{
-		if ($current == '' OR $current == $this->version)
-		{
-			return FALSE;
-		}
+		return TRUE;
 	}	
 	// END
 }

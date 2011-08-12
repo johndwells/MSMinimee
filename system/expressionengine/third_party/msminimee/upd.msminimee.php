@@ -69,9 +69,42 @@ class Msminimee_upd {
 		$this->EE->dbforge->add_field($fields);
 		$this->EE->dbforge->add_key('site_id', TRUE);
 		$this->EE->dbforge->create_table('msminimee');
+
+		// install extension
+		$rows = array(
+			array(
+				'class'		=> 'Msminimee_ext',
+				'method'	=> 'on_minimee_get_settings',
+				'hook'		=> 'minimee_get_settings',
+				'settings'	=> '',
+				'version'	=> $this->version,
+				'enabled'	=> 'y'
+			),
+			array(
+				'class'		=> 'Msminimee_ext',
+				'method'	=> 'on_minimee_get_current_settings',
+				'hook'		=> 'minimee_get_current_settings',
+				'settings'	=> '',
+				'version'	=> $this->version,
+				'enabled'	=> 'y'
+			),
+			array(
+				'class'		=> 'Msminimee_ext',
+				'method'	=> 'on_minimee_save_settings',
+				'hook'		=> 'minimee_save_settings',
+				'settings'	=> '',
+				'version'	=> $this->version,
+				'enabled'	=> 'y'
+			)
+		);
+
+		foreach($rows as $row)
+		{
+			$this->EE->db->insert('extensions', $row);
+		}
 		
 		// free up memory
-		unset($mod_data, $fields);
+		unset($rows, $mod_data, $fields);
 		
 		return TRUE;
 	}
@@ -99,6 +132,10 @@ class Msminimee_upd {
 		// drop table		
 		$this->EE->load->dbforge();
 		$this->EE->dbforge->drop_table('msminimee');
+
+		// remove extension settings
+		$this->EE->db->where('class', 'Msminimee_ext');
+		$this->EE->db->delete('extensions');
 		
 		return TRUE;
 	}
@@ -112,7 +149,6 @@ class Msminimee_upd {
 	 */	
 	public function update($current = '')
 	{
-		// If you have updates, drop 'em in here.
 		return TRUE;
 	}
 	// END
