@@ -14,8 +14,8 @@
  
 // ------------------------------------------------------------------------
 
-require_once PATH_THIRD . 'msminimee/config.php';
-require_once PATH_THIRD . 'msminimee/helper.php';
+// our helper will require_once() everything else
+require_once PATH_THIRD . 'msminimee/classes/Msminimee_helper.php';
 
 /**
  * MSMinimee Module Install/Update File
@@ -74,24 +74,8 @@ class Msminimee_upd {
 		$rows = array(
 			array(
 				'class'		=> 'Msminimee_ext',
-				'method'	=> 'on_minimee_get_settings',
+				'method'	=> 'minimee_get_settings',
 				'hook'		=> 'minimee_get_settings',
-				'settings'	=> '',
-				'version'	=> $this->version,
-				'enabled'	=> 'y'
-			),
-			array(
-				'class'		=> 'Msminimee_ext',
-				'method'	=> 'on_minimee_get_current_settings',
-				'hook'		=> 'minimee_get_current_settings',
-				'settings'	=> '',
-				'version'	=> $this->version,
-				'enabled'	=> 'y'
-			),
-			array(
-				'class'		=> 'Msminimee_ext',
-				'method'	=> 'on_minimee_save_settings',
-				'hook'		=> 'minimee_save_settings',
 				'settings'	=> '',
 				'version'	=> $this->version,
 				'enabled'	=> 'y'

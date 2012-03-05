@@ -12,7 +12,10 @@
  * @filesource
  */
  
-// END--------
+// ------------------------------------------------------------------------
+
+// our helper will require_once() everything else
+require_once PATH_THIRD . 'msminimee/classes/Msminimee_helper.php';
 
 /**
  * MSMinimee Module Front End File
