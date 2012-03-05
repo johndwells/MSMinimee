@@ -104,7 +104,7 @@ class Msminimee_helper {
 		$severity = (array_key_exists($severity, self::$_levels)) ? self::$_levels[$severity] : self::$_levels[1];
 
 		// basic EE logging
-		log_message($severity, $message);
+		log_message($severity, MSMINIMEE_NAME . ": {$message}");
 
 		// If not in CP, let's also log to template
 		if (REQ == 'PAGE')
