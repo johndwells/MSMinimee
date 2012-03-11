@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
  * ExpressionEngine - by EllisLab
@@ -99,18 +99,28 @@ class Msminimee_ext {
 	 */
 	public function minimee_get_settings($M)
 	{
-		// return current settings straight away if running default site
-		if ($this->_site_id === 1) return FALSE;
-		
+
+		// As a precaution, do nothing if not on the front-end
+		if (REQ != 'PAGE')
+		{
+			return FALSE;
+		}
+
 		$settings = Msminimee_helper::get_settings_by_site($this->_site_id);
 		
 		// if we have some settings, return them
-		if ($settings)
+		if (is_array($settings) && count($settings) > 0)
 		{
-			Msminimee_helper::log('Returning settings for site ID #' . $this->_site_id);
+			Msminimee_helper::log('Returning settings for site ID #' . $this->_site_id, 3);
 
 			$M->location = 'msminimee';
 			return $settings;
+		}
+		
+		else
+		{
+			Msminimee_helper::log('No settings found for site ID #' . $this->_site_id, 2);
+			return FALSE;
 		}
 	}
 	// ------------------------------------------------------

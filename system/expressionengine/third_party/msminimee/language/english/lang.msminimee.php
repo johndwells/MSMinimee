@@ -14,7 +14,8 @@ $lang = array(
 	
 	'disable' => 'D?',
 	
-	'install' => 'Insall Now'
+	'install' => 'Insall Now',
+	'delete' => 'Yes, delete settings for this site'
 	
 // Start inserting custom language keys/values here
 	

@@ -1,4 +1,4 @@
-<?php
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 require_once PATH_THIRD . 'msminimee/config.php';
 
@@ -8,6 +8,7 @@ require_once PATH_THIRD . 'msminimee/config.php';
  * @license http://www.opensource.org/licenses/bsd-license.php BSD license
  * @link	http://johndwells.com/software/msminimeee
  */
+
 class Msminimee_helper {
 
 	/**
@@ -18,53 +19,11 @@ class Msminimee_helper {
 		2 => 'DEBUG',
 		3 => 'INFO'
 	);
+
+
 	// ----------------------------------------------
 	
 	
-	/**
-	 * Fetch our settings by ID
-	 *
-	 * @return 	Mixed	Array of settings - empty if no settings saved yet
-	 */
-	public static function get_settings_by_site($site_id)
-	{
-		$cache =& self::cache();
-
-		// see if we have already looked up the site settings in our cache
-		if ( ! array_key_exists($site_id, $cache))
-		{
-		
-		
-			// make our MSMinimee query
-			$query = get_instance()->db
-								->select('settings')
-								->from('msminimee')
-								->where(array('enabled' => 'y', 'site_id' => $site_id))
-								->limit(1)
-								->get();
-	
-			if ($query->num_rows() > 0)
-			{
-				// log it
-				self::log('Configuration settings have been found for site ID #' . $site_id, 3);
-	
-				// return settings
-				$cache[$site_id] = unserialize($query->row()->settings);
-			}
-			
-			else
-			{
-				$cache[$site_id] = array();
-			}
-			
-			$query->free_result();
-		}
-		
-		return $cache[$site_id];
-	}
-	// ------------------------------------------------------
-
-
 	/**
 	 * Create an alias to our cache
 	 *
@@ -83,6 +42,47 @@ class Msminimee_helper {
 		}
 		
 		return $ee->session->cache['msminimee'];
+	}
+	// ------------------------------------------------------
+
+
+	/**
+	 * Fetch our settings by ID
+	 *
+	 * @return 	Array	Array of settings - empty if no settings saved yet
+	 */
+	public static function get_settings_by_site($site_id)
+	{
+		$cache =& self::cache();
+
+		// see if we have already looked up the site settings in our cache
+		if ( ! array_key_exists($site_id, $cache))
+		{
+
+			// make our MSMinimee query
+			$query = get_instance()->db
+								->select('settings')
+								->from('msminimee')
+								->where(array('enabled' => 'y', 'site_id' => $site_id))
+								->limit(1)
+								->get();
+	
+			if ($query->num_rows() > 0)
+			{
+				// save what we found in db
+				$cache[$site_id] = unserialize($query->row()->settings);
+			}
+			
+			else
+			{
+				// set to empty array
+				$cache[$site_id] = array();
+			}
+			
+			$query->free_result();
+		}
+		
+		return $cache[$site_id];
 	}
 	// ------------------------------------------------------
 

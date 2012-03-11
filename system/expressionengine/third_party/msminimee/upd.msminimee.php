@@ -26,6 +26,7 @@ require_once PATH_THIRD . 'msminimee/classes/Msminimee_helper.php';
  * @author		John D Wells
  * @link		http://johndwells.com
  */
+
 class Msminimee_upd {
 
 	public $version = MSMINIMEE_VER;
