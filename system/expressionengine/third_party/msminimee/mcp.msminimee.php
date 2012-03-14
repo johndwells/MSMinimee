@@ -87,11 +87,57 @@ class Msminimee_mcp {
 				'form_open' => form_open($this->_base_url.AMP.'method=install'),
 				'settings' => $settings,
 				'settings_exist' => $settings_exist,
-				'flashdata_success' => $this->EE->session->flashdata('message_success')
+/* 				'flashdata_success' => $this->EE->session->flashdata('message_success') */
 				);
 
 			$this->EE->load->helper('form');
 			return $this->EE->load->view('index', $vars, TRUE);
+		}
+	}
+	
+	public function delete()
+	{
+		// posting to this method confirms our desire to delete settings
+		if ( ! empty($_POST))
+		{
+			// sanity check: input value needs to match loaded site
+			if( ! isset($_POST['site_id']) || $_POST['site_id'] != $this->_site_id)
+			{
+				Msminimee_helper::log($this->EE->lang->line('unauthorized_access'), 1);
+			}
+		
+			Msminimee_helper::log('Deleting settings for Site ID ' . $this->_site_id, 3);
+
+			$this->EE->db->delete('msminimee', array('site_id' => $this->_site_id));
+
+			$this->EE->session->set_flashdata(
+				'message_success',
+			 	$this->EE->lang->line('preferences_deleted')
+			);
+			
+			$this->EE->functions->redirect(BASE.AMP.$this->_base_url);
+		}
+		
+		// otherwise we are here for the first time, and need to confirm our selection
+		else
+		{
+
+			$this->EE->cp->set_right_nav(array(
+				'settings_tab'	=> BASE.AMP.$this->_base_url.AMP.'method=settings',
+				'uninstall_tab'	=> BASE.AMP.$this->_base_url.AMP.'method=delete',
+				// Add more right nav items here.
+			));
+	
+			$this->EE->load->helper('form');
+
+			$vars = array(
+				'form_open' => form_open($this->_base_url.AMP.'method=delete', '', array('site_id' => $this->_site_id)),
+				'minimee_url' => BASE.AMP.'C=addons_extensions'.AMP.'M=extension_settings'.AMP.'file=minimee',
+				'nevermind_url' => BASE.AMP.$this->_base_url.AMP.'method=settings',
+				'site_id' => $this->_site_id
+			);
+
+			return $this->EE->load->view('delete', $vars, TRUE);
 		}
 	}
 	
@@ -129,6 +175,11 @@ class Msminimee_mcp {
 
 				$this->EE->db->insert('msminimee', $row);
 				
+				$this->EE->session->set_flashdata(
+					'message_success',
+				 	$this->EE->lang->line('preferences_installed')
+				);
+				
 				// now redirect to settings
 				$this->EE->functions->redirect(BASE.AMP.$this->_base_url.AMP.'method=settings');
 			}
@@ -139,6 +190,12 @@ class Msminimee_mcp {
 	{
 		// Query DB for any settings
 		$settings = Msminimee_helper::get_settings_by_site($this->_site_id);
+
+		$this->EE->cp->set_right_nav(array(
+			'settings_tab'	=> BASE.AMP.$this->_base_url.AMP.'method=settings',
+			'uninstall_tab'	=> BASE.AMP.$this->_base_url.AMP.'method=delete',
+			// Add more right nav items here.
+		));
 
 		// this ensures we have allowable keys
 		require_once PATH_THIRD . 'minimee/classes/Minimee_config.php';
@@ -154,7 +211,7 @@ class Msminimee_mcp {
 			'site_id' => $this->_site_id,
 			'form_open' => form_open($this->_base_url.AMP.'method=save_settings'),
 			'settings' => $settings,
-			'config_loc' => 'db', // hack
+			'config_warning' => '',
 			'flashdata_success' => $this->EE->session->flashdata('message_success')
 			);
 
