@@ -19,7 +19,7 @@ $lang = array(
 	/* settings page */
 	'install_msg' => 'You have not yet installed MSMinimee for this site; currently Minimee\'s own settings are in charge.',
 	'uninstall_msg' => 'Are you sure you want to uninstall MSMinimee for this site? Doing so will cause this site to use Minimee\'s own settings.',
-	'install' => 'Insall Now',
+	'install' => 'Install Now',
 	'uninstall_button' => 'Yes, uninstall MSMinimee for this site only',
 	
 	'' => ''
