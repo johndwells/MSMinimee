@@ -53,8 +53,7 @@ class Msminimee_mcp {
 		$this->_base_url = 'C=addons_modules'.AMP.'M=show_module_cp'.AMP.'module=msminimee';
 
 		// begin setting up our view
-		$this->EE->cp->set_variable('cp_page_title', 
-								lang('msminimee_module_name'));
+		$this->EE->view->cp_page_title = lang('msminimee_module_name');
 		
 	}
 	
