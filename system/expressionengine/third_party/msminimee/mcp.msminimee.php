@@ -218,11 +218,20 @@ class Msminimee_mcp {
 		/*
 		 * SHIFT OVER TO MINIMEE
 		 */
-		$tmp = $this->EE->load->_ci_view_path;
-		$this->EE->lang->loadfile('minimee');
-    	$this->EE->load->_ci_view_path = PATH_THIRD . 'minimee/views/';
-		$return = $this->EE->load->view('settings_form', $vars, TRUE);
-		$this->EE->load->_ci_view_path = $tmp;
+		if(version_compare(APP_VER, '2.8.0', '>='))
+		{
+			$this->EE->lang->loadfile('minimee');
+			$this->EE->load->add_theme_cascade(PATH_THIRD . 'minimee/views/');
+			$return = $this->EE->load->view('settings_form', $vars, TRUE);
+		}
+		else
+		{
+			$tmp = $this->EE->load->_ci_view_path;
+			$this->EE->lang->loadfile('minimee');
+			$this->EE->load->_ci_view_path = PATH_THIRD . 'minimee/views/';
+			$return = $this->EE->load->view('settings_form', $vars, TRUE);
+			$this->EE->load->_ci_view_path = $tmp;
+		}
 		
 		return $return;
 	}
