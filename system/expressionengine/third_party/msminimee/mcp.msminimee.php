@@ -210,6 +210,7 @@ class Msminimee_mcp {
 			'site_id' => $this->_site_id,
 			'form_open' => form_open($this->_base_url.AMP.'method=save_settings'),
 			'settings' => $settings,
+			'hide_advanced_on_startup' => false,
 			'config_warning' => '',
 			'flashdata_success' => $this->EE->session->flashdata('message_success')
 			);
